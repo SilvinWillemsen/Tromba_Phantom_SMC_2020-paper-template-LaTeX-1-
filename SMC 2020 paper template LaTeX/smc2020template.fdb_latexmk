@@ -1,14 +1,14 @@
 # Fdb version 3
-["bibtex smc2020template"] 0 "smc2020template.aux" "smc2020template.bbl" "smc2020template" 0
+["bibtex smc2020template"] 1580384678 "smc2020template.aux" "smc2020template.bbl" "smc2020template" 1580384678
   "./IEEEtran.bst" 1580383907 59215 bc5380b3434a66b895bbc75d3d380540 ""
   "smc2020bib.bib" 1580383907 919 b80875d7e0cc288137415f12f7746a77 ""
-  "smc2020template.aux" 1580384232 1684 0fd5b800f1f0d813d9bc7a8958e06f70 ""
+  "smc2020template.aux" 1580384678 1684 0fd5b800f1f0d813d9bc7a8958e06f70 ""
   "smc2020template.bcf" 0 -1 0 ""
   (generated)
   "smc2020template.bbl"
-["pdflatex"] 1580384232 "/Users/SilvinW/repositories/Tromba_Phantom_SMC_2020-paper-template-LaTeX-1-/SMC 2020 paper template LaTeX/smc2020template.tex" "/Users/SilvinW/repositories/Tromba_Phantom_SMC_2020-paper-template-LaTeX-1-/SMC 2020 paper template LaTeX/smc2020template.pdf" "smc2020template" 1580384232
-  "/Users/SilvinW/repositories/Tromba_Phantom_SMC_2020-paper-template-LaTeX-1-/SMC 2020 paper template LaTeX/smc2020template.aux" 1580384232 8 a94a2480d3289e625eea47cd1b285758 ""
-  "/Users/SilvinW/repositories/Tromba_Phantom_SMC_2020-paper-template-LaTeX-1-/SMC 2020 paper template LaTeX/smc2020template.tex" 1580384230 5231 1e58bb31c9a47151a7a4e26590156337 ""
+["pdflatex"] 1580384678 "/Users/SilvinW/repositories/Tromba_Phantom_SMC_2020-paper-template-LaTeX-1-/SMC 2020 paper template LaTeX/smc2020template.tex" "/Users/SilvinW/repositories/Tromba_Phantom_SMC_2020-paper-template-LaTeX-1-/SMC 2020 paper template LaTeX/smc2020template.pdf" "smc2020template" 1580384678
+  "/Users/SilvinW/repositories/Tromba_Phantom_SMC_2020-paper-template-LaTeX-1-/SMC 2020 paper template LaTeX/smc2020template.aux" 1580384678 1684 0fd5b800f1f0d813d9bc7a8958e06f70 ""
+  "/Users/SilvinW/repositories/Tromba_Phantom_SMC_2020-paper-template-LaTeX-1-/SMC 2020 paper template LaTeX/smc2020template.tex" 1580384676 5238 ad0c3ad080f9266a5aa2858dcb89ec1b ""
   "/usr/local/texlive/2016/texmf-dist/fonts/enc/dvips/base/8r.enc" 1165713224 4850 80dc9bab7f31fb78a000ccfed0e27cab ""
   "/usr/local/texlive/2016/texmf-dist/fonts/map/fontname/texfonts.map" 1272929888 3287 e6b82fe08f5336d4d5ebc73fb1152e87 ""
   "/usr/local/texlive/2016/texmf-dist/fonts/tfm/adobe/courier/pcrr7t.tfm" 1136768653 960 379cc0019370a9e0208a0a3f949f847a ""
@@ -69,15 +69,16 @@
   "/usr/local/texlive/2016/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1478168725 1888048 f2c5faed5981a516f406b2ccc20bff71 ""
   "/usr/local/texlive/2016/texmf-var/web2c/pdftex/pdflatex.fmt" 1478168753 3873397 d7097b3ecb6d977e7d73acf1f03b0bec ""
   "/usr/local/texlive/2016/texmf.cnf" 1463979140 577 2938757e76f31531e65cc647e3507693 ""
-  "omni.png" 0 -1 0 ""
+  "figures/omniSchematic.png" 1580384586 229889 a9bf94c24015aa7a111be11764b67ec5 ""
   "smc2020.sty" 1580383907 5716 8f6e13ede2df41d58f742dcbc1bf9837 ""
-  "smc2020template.aux" 0 -1 0 ""
-  "smc2020template.bbl" 0 -1 0 "bibtex smc2020template"
-  "smc2020template.tex" 1580384230 5231 1e58bb31c9a47151a7a4e26590156337 ""
+  "smc2020template.aux" 1580384678 1684 0fd5b800f1f0d813d9bc7a8958e06f70 ""
+  "smc2020template.bbl" 1580384678 877 ff870bcb4c5888cb430f09fb5d82ad80 "bibtex smc2020template"
+  "smc2020template.out" 0 -1 0 ""
+  "smc2020template.tex" 1580384676 5238 ad0c3ad080f9266a5aa2858dcb89ec1b ""
   (generated)
-  "smc2020template.pdf"
   "/Users/SilvinW/repositories/Tromba_Phantom_SMC_2020-paper-template-LaTeX-1-/SMC 2020 paper template LaTeX/smc2020template.pdf"
   "smc2020template.aux"
+  "smc2020template.log"
+  "smc2020template.pdf"
   "smc2020template.out"
   "/Users/SilvinW/repositories/Tromba_Phantom_SMC_2020-paper-template-LaTeX-1-/SMC 2020 paper template LaTeX/smc2020template.log"
-  "smc2020template.log"
