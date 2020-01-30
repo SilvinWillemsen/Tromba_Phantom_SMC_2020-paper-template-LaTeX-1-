@@ -73,8 +73,14 @@ INPUT /usr/local/texlive/2016/texmf-dist/tex/latex/hyperref/nameref.sty
 INPUT /usr/local/texlive/2016/texmf-dist/tex/latex/hyperref/nameref.sty
 INPUT /usr/local/texlive/2016/texmf-dist/tex/generic/oberdiek/gettitlestring.sty
 INPUT /usr/local/texlive/2016/texmf-dist/tex/generic/oberdiek/gettitlestring.sty
-OUTPUT /Users/SilvinW/repositories/Tromba_Phantom_SMC_2020-paper-template-LaTeX-1-/SMC 2020 paper template LaTeX/smc2020template.out
+INPUT /Users/SilvinW/repositories/Tromba_Phantom_SMC_2020-paper-template-LaTeX-1-/SMC 2020 paper template LaTeX/smc2020template.out
+INPUT /Users/SilvinW/repositories/Tromba_Phantom_SMC_2020-paper-template-LaTeX-1-/SMC 2020 paper template LaTeX/smc2020template.out
+INPUT /Users/SilvinW/repositories/Tromba_Phantom_SMC_2020-paper-template-LaTeX-1-/SMC 2020 paper template LaTeX/smc2020template.out
+INPUT /Users/SilvinW/repositories/Tromba_Phantom_SMC_2020-paper-template-LaTeX-1-/SMC 2020 paper template LaTeX/smc2020template.out
 OUTPUT /Users/SilvinW/repositories/Tromba_Phantom_SMC_2020-paper-template-LaTeX-1-/SMC 2020 paper template LaTeX/smc2020template.pdf
+INPUT /Users/SilvinW/repositories/Tromba_Phantom_SMC_2020-paper-template-LaTeX-1-/SMC 2020 paper template LaTeX/smc2020template.out
+INPUT /Users/SilvinW/repositories/Tromba_Phantom_SMC_2020-paper-template-LaTeX-1-/SMC 2020 paper template LaTeX/smc2020template.out
+OUTPUT /Users/SilvinW/repositories/Tromba_Phantom_SMC_2020-paper-template-LaTeX-1-/SMC 2020 paper template LaTeX/smc2020template.out
 INPUT /usr/local/texlive/2016/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 INPUT /usr/local/texlive/2016/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 INPUT /usr/local/texlive/2016/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty
@@ -93,6 +99,11 @@ INPUT /usr/local/texlive/2016/texmf-dist/fonts/tfm/adobe/times/ptmr7t.tfm
 INPUT /usr/local/texlive/2016/texmf-dist/fonts/tfm/adobe/times/ptmri7t.tfm
 INPUT /usr/local/texlive/2016/texmf-dist/tex/latex/psnfss/omsptm.fd
 INPUT /usr/local/texlive/2016/texmf-dist/tex/latex/psnfss/omsptm.fd
+INPUT /Users/SilvinW/repositories/Tromba_Phantom_SMC_2020-paper-template-LaTeX-1-/SMC 2020 paper template LaTeX/./figures/omniSchematic.png
+INPUT ./figures/omniSchematic.png
+INPUT ./figures/omniSchematic.png
+INPUT /Users/SilvinW/repositories/Tromba_Phantom_SMC_2020-paper-template-LaTeX-1-/SMC 2020 paper template LaTeX/smc2020template.bbl
+INPUT /Users/SilvinW/repositories/Tromba_Phantom_SMC_2020-paper-template-LaTeX-1-/SMC 2020 paper template LaTeX/smc2020template.bbl
 INPUT /usr/local/texlive/2016/texmf-dist/fonts/vf/adobe/times/ptmb7t.vf
 INPUT /usr/local/texlive/2016/texmf-dist/fonts/tfm/adobe/times/ptmb8r.tfm
 INPUT /usr/local/texlive/2016/texmf-var/fonts/map/pdftex/updmap/pdftex.map
