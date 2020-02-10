@@ -135,11 +135,9 @@ Tromba stuff Phantom omni
 %
 
 \section{Introduction}\label{sec:introduction}
-The tromba marina is a bowed monochord (a single-string instrument) from the 15th century . The string rests on a loose bridge that rattles against the body which creates a sound with brass- or trumpet-like qualities. It is played by slightly damping the string with a finger of the non-bowing hand at different locations triggering harmonics of the open string. Unlike most bowed instruments, the tromba marina is bowed closer to the nut, and the pitch-determining finger is closer to the bridge (below the bow).
+The tromba marina is a bowed monochord from medeival Europe \cite{encyclopaedia2020}. The string rests on a loose bridge that rattles against the body which creates a sound with brass- or trumpet-like qualities. Different pitches are created by slightly damping the string with a finger of the non-bowing hand at different locations triggering harmonics of the open string. Unlike most bowed instruments, the tromba marina is bowed closer to the nut, and the pitch-determining finger is closer to the bridge (below the bow).
 
 As the tromba marina is rare and valuable, very few have the opportunity to play it. Using a simulation of the physics of the instrument for the sound, a controller providing haptic feedback, and visuals rendered in a virtual reality environment, we attempt to resurrect the instrument. We want to emphasize that the visuals are only used for guiding the user, as we are most interested in the haptic feedback and audio.
-
-The experiment will be divided in two parts. Firstly you are asked to explore the instrument on your own; take your time and try to find out how the instrument works and how it sounds. When you think you are done, let us know. We will instruct you about the second part.
 
 The PHANTOM Omni (or simply Omni), 
 
@@ -151,6 +149,9 @@ The PHANTOM Omni (or simply Omni) is a six-degrees-of-freedom haptic system deve
 \end{figure}
 
 \section{Implementation}
+The virtual tromba marina consists of several components: visuals, audio, and haptics. 
+
+The application was built using cross-platform game engine Unity \cite{unity}
 The raw data provided by the Omni is the following:
 \begin{itemize}
     \item absolute position of pivot point B2 (three degrees of freedom)
@@ -177,10 +178,14 @@ where $L$ is the length of the string and $n = 2,3,...8$ is the harmonic number,
 
 \begin{figure}[ht]\includegraphics[width=1.0\columnwidth]{SMC 2020 paper template LaTeX/figures/controller.png}
 \centering
-  \caption{The left Oculus controller with the controls for changing the pitch highlighted. \label{fig:oculusController}}
+  \caption{The left Oculus Touch controller. The controls for changing the pitch are highlighted. \label{fig:oculusController}}
 \end{figure}
 
 \section{Evaluation}
+The evaluation was inspired by \cite{Young2003} \cite{Someren1994} \cite{Stowell2009} and \cite{Finstad2010}
+
+
+The experiment will be divided in two parts. Firstly, the participants are asked to explore the instrument on their own.
 
 \begin{figure}[ht]\includegraphics[width=1.0\columnwidth]{SMC 2020 paper template LaTeX/figures/PlayabilityChart.pdf}
 \centering
