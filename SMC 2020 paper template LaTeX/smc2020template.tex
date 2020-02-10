@@ -9,6 +9,7 @@
 \usepackage{ifpdf}
 \usepackage[english]{babel}
 \usepackage{cite}
+\usepackage{amsmath}
 
 %%%%%%%%%%%%%%%%%%%%%%%% Some useful packages %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%% See related documentation %%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -139,6 +140,7 @@ The PHANTOM Omni (or simply Omni),
 \section{Hardware description}
 The PHANTOM Omni (or simply Omni) is a six-degrees-of-freedom haptic system developed by SensAble Technologies. FireWire \cite{Someone:00}
 \begin{figure}[ht]\includegraphics[width=1.0\columnwidth]{figures/omniSchematic.png}
+\centering
   \caption{The PHANTOM Omni has six degrees of freedom, three of which provide force feedback (A1-3), and three not providing this feedback; only tracking position (B1-3). \label{fig:omni}}
 \end{figure}
 
@@ -157,13 +159,26 @@ The end of the bow -- where a user normally holds it -- has been placed at the p
 The fact that pivot points B1-3 do not provide force feedback gives rise to an issue in our application. If the virtual
 position of pivot point B2 is not the current point of interaction, in the extreme case when the user is bowing using the end of the bow, a force has to be applied as to not go through the string. To solve this issue, we created a separate object with which the bow (pivot point B2 to be exact) will interact with. The y-rotation and y-position of this exactly follows that of the Omni-pen and uses the virtual string as the centerpoint. Furthermore, its position in the x-z--plane is determined by the distance between B2 and the string.
 
+Volume ratios
 
+\subsection{Controls}
+As most people are right-handed, it was chosen to also have the bow in the right hand in the application. \textbf{more about bowing hand here}
+
+As the position of the first node along the string is at \begin{equation}\label{eq:node}
+    x_\text{node} = L\cdot n^{-1},
+\end{equation}
+where $L$ is the length of the string and $n = 2,3,...8$ is the harmonic number, we want the damping finger to be set to these positions to induce these harmonics. The lowest harmonic has been set at half the string length $L/2$, i.e., the string is never completely open. The highest harmonic has been chosen to be that can still be played using the model. The location of the damping finger is controlled using the `X' and `Y' buttons and the joystick on the left Oculus controller (see Figure \ref{fig:oculusController}). The buttons are for discrete control of the damping finger, where `Y' increases $n$ in Equation \eqref{eq:node} and `X' decreases it. The joystick allows for fine pitch control and moves the finger up and down the string. This functionality could potentially create pitch glides in the output sound of the application, but make it harder to `hit' a harmonic
+
+\begin{figure}[ht]\includegraphics[width=0.8\columnwidth]{SMC 2020 paper template LaTeX/figures/controller.png}
+\centering
+  \caption{The left Oculus controller with the controls for changing the pitch highlighted. \label{fig:oculusController}}
+\end{figure}
 
 \section{Evaluation}
 test
 
 \section{Discussion}\label{sec:discussion}
-test
+Cognitive load of speech and playing an instrument are ``the same" (Paisa, 2020). So participants speaking their mind while playing might be an issue. Most probably, they will alter between playing and ``thinking aloud". 
 
 \section{Conclusions}
 test
