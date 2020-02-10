@@ -135,6 +135,12 @@ Tromba stuff Phantom omni
 %
 
 \section{Introduction}\label{sec:introduction}
+The tromba marina is a bowed monochord (a single-string instrument) from the 15th century . The string rests on a loose bridge that rattles against the body which creates a sound with brass- or trumpet-like qualities. It is played by slightly damping the string with a finger of the non-bowing hand at different locations triggering harmonics of the open string. Unlike most bowed instruments, the tromba marina is bowed closer to the nut, and the pitch-determining finger is closer to the bridge (below the bow).
+
+As the tromba marina is rare and valuable, very few have the opportunity to play it. Using a simulation of the physics of the instrument for the sound, a controller providing haptic feedback, and visuals rendered in a virtual reality environment, we attempt to resurrect the instrument. We want to emphasize that the visuals are only used for guiding the user, as we are most interested in the haptic feedback and audio.
+
+The experiment will be divided in two parts. Firstly you are asked to explore the instrument on your own; take your time and try to find out how the instrument works and how it sounds. When you think you are done, let us know. We will instruct you about the second part.
+
 The PHANTOM Omni (or simply Omni), 
 
 \section{Hardware description}
@@ -167,15 +173,19 @@ As most people are right-handed, it was chosen to also have the bow in the right
 As the position of the first node along the string is at \begin{equation}\label{eq:node}
     x_\text{node} = L\cdot n^{-1},
 \end{equation}
-where $L$ is the length of the string and $n = 2,3,...8$ is the harmonic number, we want the damping finger to be set to these positions to induce these harmonics. The lowest harmonic has been set at half the string length $L/2$, i.e., the string is never completely open. The highest harmonic has been chosen to be that can still be played using the model. The location of the damping finger is controlled using the `X' and `Y' buttons and the joystick on the left Oculus controller (see Figure \ref{fig:oculusController}). The buttons are for discrete control of the damping finger, where `Y' increases $n$ in Equation \eqref{eq:node} and `X' decreases it. The joystick allows for fine pitch control and moves the finger up and down the string. This functionality could potentially create pitch glides in the output sound of the application, but make it harder to `hit' a harmonic
+where $L$ is the length of the string and $n = 2,3,...8$ is the harmonic number, we want the damping finger to be set to these positions to induce these harmonics. The lowest harmonic has been set at half the string length $L/2$, i.e., the string is never completely open. The highest harmonic has been chosen to be that can still be played using the model. The location of the damping finger is controlled using the `X' and `Y' buttons and the joystick on the left Oculus controller (see Figure \ref{fig:oculusController}). The buttons are for discrete control of the damping finger, where `Y' increases $n$ in Equation \eqref{eq:node} and `X' decreases it, and the joystick allows for fine pitch control and moves the finger up and down the string. The latter could potentially create pitch glides in the output sound of the application, but make it harder to `hit' a perfect harmonic according to Equation \eqref{eq:node}.
 
-\begin{figure}[ht]\includegraphics[width=0.8\columnwidth]{SMC 2020 paper template LaTeX/figures/controller.png}
+\begin{figure}[ht]\includegraphics[width=1.0\columnwidth]{SMC 2020 paper template LaTeX/figures/controller.png}
 \centering
   \caption{The left Oculus controller with the controls for changing the pitch highlighted. \label{fig:oculusController}}
 \end{figure}
 
 \section{Evaluation}
-test
+
+\begin{figure}[ht]\includegraphics[width=1.0\columnwidth]{SMC 2020 paper template LaTeX/figures/PlayabilityChart.pdf}
+\centering
+  \caption{Playability chart of a virtual musical instrument \cite{Young2003}. \label{fig:oculusController}}
+\end{figure}
 
 \section{Discussion}\label{sec:discussion}
 Cognitive load of speech and playing an instrument are ``the same" (Paisa, 2020). So participants speaking their mind while playing might be an issue. Most probably, they will alter between playing and ``thinking aloud". 
