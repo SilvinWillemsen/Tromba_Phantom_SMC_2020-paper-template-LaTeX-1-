@@ -26,7 +26,8 @@
 
 
 %user defined variables
-\def\papertitle{Resurrecting the Tromba Marina: the impact of a friction model on the interaction with a virtual instrument}
+\def\papertitle{Resurrecting the Tromba Marina: a bowed Virtual Reality instrument using haptic feedback and accurate physical modelling}
+
 \def\firstauthor{First author}
 \def\secondauthor{Second author}
 \def\thirdauthor{Third author}
@@ -131,18 +132,41 @@
 %
 \begin{abstract}
 Tromba stuff Phantom omni
+
+PHANTOM Omni for control and haptic feedback.
+
+This paper presents the implementation and the evaluation of a VR bowed string instrument.  
+Quick results
 \end{abstract}
 %
 
 \section{Introduction}\label{sec:introduction}
-The tromba marina is a bowed monochord from medeival Europe \cite{encyclopaedia2020}. The string rests on a loose bridge that rattles against the body which creates a sound with brass- or trumpet-like qualities. Different pitches are created by slightly damping the string with a finger of the non-bowing hand at different locations triggering harmonics of the open string. Unlike most bowed instruments, the tromba marina is bowed closer to the nut, and the pitch-determining finger is closer to the bridge (below the bow).
+The tromba marina is a bowed monochord from medieval Europe \cite{encyclopaedia2020}. The string rests on a loose bridge that rattles against the body. This rattling mechanism creates a sound with brass- or trumpet-like qualities. Unlike other bowed string instruments, different frequencies are created by slightly damping the string with a finger of the non-bowing hand as opposed to pressing the string fully against the neck. This interaction at different locations along the string triggers the different harmonics of the open string. Furthermore, the tromba marina is bowed closer to the nut, and the finger determining the frequency is closer to the bridge (below the bow).
 
-As the tromba marina is rare and valuable, very few have the opportunity to play it. Using a simulation of the physics of the instrument for the sound, a controller providing haptic feedback, and visuals rendered in a virtual reality environment, we attempt to resurrect the instrument. We want to emphasize that the visuals are only used for guiding the user, as we are most interested in the haptic feedback and audio.
+As the tromba marina is a rare instrument which can be merely found in museums, very few have the opportunity to play it.
 
-The PHANTOM Omni (or simply Omni), 
+In this paper, we aim to recreate a simulation of the feeling of playing this instrument by using physics based simulations and haptic feedback, together with a visual virtual reality experience.
+Simulating the vibrations' feeling of a string instrument in particularly important since it has been shown how vibration's level can be strongly perceived \cite{askenfelt1992vibration}. 
+%We want to emphasize that the visuals are only used for guiding the user, as we are most interested in the haptic feedback and audio.
+
+Multisensory simulations for musical applications have shown some interest in the sound and music computing community. 
+As stated in 
+\cite{danieau2012enhancing}, the combination of haptics and audio visual content has its own specific challenges worth investigating.
+Sile O'Modhrain is one of the pioneers that noticed the tight connection between auditory and haptic feedback and investigated how haptic feedback can improve the playability of virtual instruments \cite{o2001playing}.
+At the same time, Charles Nichols developed the vBow, an haptic human computer interface for bowing \cite{nichols2002vbow}.
+Researchers from ACROE in Grenoble have also developed for several years multisensory instruments based on the mass-spring-system paradigm, with custom-made bowing interfaces \cite{florens1990modeles,luciani2005action}.
+Haptic feedback for digital waveguide models has also been investigated in \cite{sinclair2009audio}.
+
+In this paper we aim to use democratized virtual reality technologies controlled by a commercial device called the
+ PHANTOM Omni (or simply Omni) by SenseAble Technologies (now 3D Systems) \cite{phantom}.
+ The PHANTOM Omni is a six-degrees-of-freedom system providing the haptic feedback in our application. Work using this controller in the context of audio include \cite{avanzini2006} and \cite{passalenti2019}, the latter of which is in the context of control of musical instruments, specifically on picking guitar strings.
+
+Avanzini and Crosato test the influence of haptic and auditory cues on perception of material stiffness separately, but their work does not deal with musical instruments. Passalenti et. al's experiment focuses on guitar strings.
+We start by describing the implementation of the system, both from the hardware and software perspective, and then we describe an experiment to evaluate..... 
+
 
 \section{Hardware description}
-The PHANTOM Omni (or simply Omni) is a six-degrees-of-freedom haptic system developed by SensAble Technologies. FireWire \cite{Someone:00}
+The PHANTOM Omni (or simply Omni) is a six-degrees-of-freedom haptic system developed by SensAble Technologies. FireWire
 \begin{figure}[ht]\includegraphics[width=1.0\columnwidth]{figures/omniSchematic.png}
 \centering
   \caption{The PHANTOM Omni has six degrees of freedom, three of which provide force feedback (A1-3), and three not providing this feedback; only tracking position (B1-3). \label{fig:omni}}
@@ -171,10 +195,15 @@ Volume ratios
 \subsection{Controls}
 As most people are right-handed, it was chosen to also have the bow in the right hand in the application. \textbf{more about bowing hand here}
 
-As the position of the first node along the string is at \begin{equation}\label{eq:node}
-    x_\text{node} = L\cdot n^{-1},
+The left hand is used to control the pitch by changing the position of the damping finger along the string. This position is defined as  
+\begin{equation}\label{eq:node}
+    x_\text{f} = L\cdot n^{-1},
 \end{equation}
-where $L$ is the length of the string and $n = 2,3,...8$ is the harmonic number, we want the damping finger to be set to these positions to induce these harmonics. The lowest harmonic has been set at half the string length $L/2$, i.e., the string is never completely open. The highest harmonic has been chosen to be that can still be played using the model. The location of the damping finger is controlled using the `X' and `Y' buttons and the joystick on the left Oculus controller (see Figure \ref{fig:oculusController}). The buttons are for discrete control of the damping finger, where `Y' increases $n$ in Equation \eqref{eq:node} and `X' decreases it, and the joystick allows for fine pitch control and moves the finger up and down the string. The latter could potentially create pitch glides in the output sound of the application, but make it harder to `hit' a perfect harmonic according to Equation \eqref{eq:node}.
+where $L$ is the length of the string and $n \in [2,8]$. If $n$ is an integer, it is the number of the harmonic we want to induce. The lowest harmonic has been set at half the string length $L/2$, meaning that the string is never completely open. The highest harmonic (8 in this case) has been chosen to be the one that can still be (comfortably) played. The location of the damping finger $x_\text{f}$ is controlled using the `X' and `Y' buttons and the joystick on the left Oculus controller (see Figure \ref{fig:oculusController}). The buttons are for ``discrete harmonic" control of the damping finger, i.e. integer values of $n$ in Equation \eqref{eq:node}, where `Y' increases $n$ and `X' decreases it. The joystick allows for fine pitch control, i.e., decimal values of $n$,  and moves the damping finger up and down the string. The latter could potentially create pitch glides in the output sound of the application, but make it harder to `hit' a perfect harmonic according to Equation \eqref{eq:node}. If a button is pressed while the current finger position is between two discrete points, the position will move to the next or previous discrete position, depending on the button pressed.
+%As the position of the first node along the string is at \begin{equation}\label{eq:node}
+%     x_\text{node} = L\cdot n^{-1},
+% \end{equation}
+% where $L$ is the length of the string and $n \in [2,8]$ is the harmonic number, we want the damping finger to be set to these positions to induce these harmonics. The lowest harmonic has been set at half the string length $L/2$, meaning that the string is never completely open. The highest harmonic has been chosen to be the one that can still be (comfortably) played. The location of the damping finger ($x_\text{f}$) is controlled using the `X' and `Y' buttons and the joystick on the left Oculus controller (see Figure \ref{fig:oculusController}). The buttons are for discrete control of the damping finger, where `Y' increases $n$ in Equation \eqref{eq:node} and `X' decreases it. The joystick allows for fine pitch control  and moves the damping finger up and down the string. The latter could potentially create pitch glides in the output sound of the application, but make it harder to `hit' a perfect harmonic according to Equation \eqref{eq:node}. If a button is pressed while the current finger position is between two discrete points, the position will move to the next or previous discrete position, depending on the button pressed.
 
 \begin{figure}[ht]\includegraphics[width=1.0\columnwidth]{SMC 2020 paper template LaTeX/figures/controller.png}
 \centering
@@ -182,10 +211,19 @@ where $L$ is the length of the string and $n = 2,3,...8$ is the harmonic number,
 \end{figure}
 
 \section{Evaluation}
-The evaluation was inspired by \cite{Young2003} \cite{Someren1994} \cite{Stowell2009} and \cite{Finstad2010}
+The evaluation was inspired by \cite{Young2003} \cite{Someren1994} \cite{Stowell2009} and \cite{Finstad2010} (\textbf{obviously this will be elaborated upon})
 
+The goal of the evaluation was not to test minute interactions, but rather the general experience and the playability of our application. The experiment started with the participant reading an introduction about the experiment and 
 
-The experiment will be divided in two parts. Firstly, the participants are asked to explore the instrument on their own.
+Then
+
+The interaction part was divided into two parts. Firstly, the participants are asked to explore the instrument on their own. Then, when they feel they are ready to move on, an audio clip made by the authors using the application was played to show what was possible with the application to inspire the second round of free exploration. It was stressed that the participants did not have to recreate what they heard, but merely use it as inspiration. 
+
+Presenting the second phase as ``We're going to show you a recording made with the instrument" 
+
+Semi-structured interview which lasted 5 minutes on average
+
+The full experiment lasted ca. 30 minutes for all participants.
 
 \begin{figure}[ht]\includegraphics[width=1.0\columnwidth]{SMC 2020 paper template LaTeX/figures/PlayabilityChart.pdf}
 \centering
