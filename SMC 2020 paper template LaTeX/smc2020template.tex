@@ -3,13 +3,19 @@
 % adapted from previous SMC paper templates
 % -----------------------------------------------
 
-\documentclass{article}
+\documentclass[dvipsnames, pdftex]{article}
 \usepackage{smc2020}
 \usepackage{times}
 \usepackage{ifpdf}
 \usepackage[english]{babel}
 \usepackage{cite}
 \usepackage{amsmath}
+\usepackage{textcomp}
+
+\usepackage{xcolor}
+\def\SWcomment[#1]{\textcolor{Red}{#1}}
+\def\RPcomment[#1]{\textcolor{Blue}{#1}}
+\def\SScomment[#1]{\textcolor{OliveGreen}{#1}}
 
 %%%%%%%%%%%%%%%%%%%%%%%% Some useful packages %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%% See related documentation %%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -28,9 +34,9 @@
 %user defined variables
 \def\papertitle{Resurrecting the Tromba Marina: a bowed Virtual Reality instrument using haptic feedback and accurate physical modelling}
 
-\def\firstauthor{First author}
-\def\secondauthor{Second author}
-\def\thirdauthor{Third author}
+\def\firstauthor{Silvin Willemsen}
+\def\secondauthor{Razvan Paisa}
+\def\thirdauthor{Stefania Serafin}
 
 % adds the automatic
 % Saves a lot of output space in PDF... after conversion with the distiller
@@ -100,9 +106,10 @@
 % Single address
 % To use with only one author or several with the same address
 % ---------------
-%\oneauthor
-%   {\firstauthor} {Affiliation1 \\ %
-%     {\tt \href{mailto:author1@smcnetwork.org}{author1@smcnetwork.org}}}
+\oneauthor
+   {\firstauthor, \secondauthor\ and \thirdauthor} {Multisensory Experience Lab, CREATE\\
+  Aalborg University Copenhagen\\ %
+    {\tt \href{mailto:sil@create.aau.dk}{\{sil, rpa, sts\}@create.aau.dk}}}
 
 %Two addresses
 %--------------
@@ -114,13 +121,13 @@
 
 % Three addresses
 % --------------
- \threeauthors
-   {\firstauthor} {Affiliation1 \\ %
-     {\tt \href{mailto:author1@smcnetwork.org}{author1@smcnetwork.org}}}
-   {\secondauthor} {Affiliation2 \\ %
-     {\tt \href{mailto:author2@smcnetwork.org}{author2@smcnetwork.org}}}
-   {\thirdauthor} { Affiliation3 \\ %
-     {\tt \href{mailto:author3@smcnetwork.org}{author3@smcnetwork.org}}}
+%  \threeauthors
+%   {\firstauthor} {Affiliation1 \\ %
+%      {\tt \href{mailto:author1@smcnetwork.org}{author1@smcnetwork.org}}}
+%   {\secondauthor} {Affiliation2 \\ %
+%      {\tt \href{mailto:author2@smcnetwork.org}{author2@smcnetwork.org}}}
+%   {\thirdauthor} { Affiliation3 \\ %
+%      {\tt \href{mailto:author3@smcnetwork.org}{author3@smcnetwork.org}}}
 
 
 % ***************************************** the document starts here ***************
@@ -137,6 +144,8 @@ PHANTOM Omni for control and haptic feedback.
 
 This paper presents the implementation and the evaluation of a VR bowed string instrument.  
 Quick results
+
+Commenting in colours :O \SWcomment[Silvin]{} \RPcomment[Razvan]{} \SScomment[Stefania]{}
 \end{abstract}
 %
 
@@ -169,33 +178,39 @@ We start by describing the implementation of the system, both from the hardware 
 The PHANTOM Omni (or simply Omni) is a six-degrees-of-freedom haptic system developed by SensAble Technologies. FireWire
 \begin{figure}[ht]\includegraphics[width=1.0\columnwidth]{figures/omniSchematic.png}
 \centering
-  \caption{The PHANTOM Omni has six degrees of freedom, three of which provide force feedback (A1-3), and three not providing this feedback; only tracking position (B1-3). \label{fig:omni}}
+  \caption{The PHANTOM Omni has six degrees of freedom, three of which provide force feedback (A1-3), and three only tracking position (B1-3). \label{fig:omni}}
 \end{figure}
 
 \section{Implementation}
-The virtual tromba marina consists of several components: visuals, audio, and haptics. 
+The virtual tromba marina consists of several components: visuals, haptics and audio, all of which will be elaborated upon in this section. Then controls and mapping and finally the setup of the system will be presented.
 
-The application was built using cross-platform game engine Unity \cite{unity}
+\subsection{Visuals}
+The application was built using cross-platform game engine Unity \cite{unity}. Unity can be used to build applications for Virtual Reality (VR) applications. A 3D model of the tromba marina was made inspired by a real-life instrument (presented in \cite{Baldwin2016}) available to the authors. Even though the visuals are not the focus of the implementation and eventual evaluation, it was used to guide the users movements and give them a sense of where the virtual instrument was located. Moreover, some time was spent to make the scene `medieval' to match the instrument. \SWcomment[You could probably elaborate better here Razvan]
+
+\subsection{Haptics}
 The raw data provided by the Omni is the following:
 \begin{itemize}
     \item absolute position of pivot point B2 (three degrees of freedom)
     \item rotation (three degrees of freedom)
-    \item pressure (force depth \textbf{check whether this is correct})
+    \item pressure (touching depth)
 \end{itemize}
+%
+The axes are labelled as follows in relation to the virtual tromba marina: x-axis - width (horizontally across the soundboard -- the common interaction direction), y-axis - height (floor to ceiling) and z-axis - depth (horizontally perpendicular to the soundboard).
 
-The axes are labelled as follows in relation to the virtual instrument: x-axis - width (horizontally across the soundboard -- the common interaction direction), y-axis - height (floor to ceiling) and z-axis - depth (horizontally perpendicular to the soundboard).
 
-
-The end of the bow -- where a user normally holds it -- has been placed at the pivot point B2 \textbf{$\leftarrow$ not exactly true}
+The end of the bow -- where a user normally holds it -- has been placed at the pivot point B2 \SWcomment[$\leftarrow$ is this true?]
 The fact that pivot points B1-3 do not provide force feedback gives rise to an issue in our application. If the virtual
-position of pivot point B2 is not the current point of interaction, in the extreme case when the user is bowing using the end of the bow, a force has to be applied as to not go through the string. To solve this issue, we created a separate object with which the bow (pivot point B2 to be exact) will interact with. The y-rotation and y-position of this exactly follows that of the Omni-pen and uses the virtual string as the centerpoint. Furthermore, its position in the x-z--plane is determined by the distance between B2 and the string.
+position of pivot point B2 is not the current point of interaction, in the extreme case when the user is bowing using the end of the bow, a force has to be applied as to not go through the string. To solve this issue, we created a separate object with which the bow (pivot point B2 to be exact) will interact with. The y-rotation and y-position of this exactly follows that of the Omni-pen and uses the virtual string as the centerpoint. The y-rotation will change the rotation of a local coordinate system (see Figure \ref{fig:localGlobal}. Furthermore, its (now local) x-position is determined by the distance between B2 and the string. \SWcomment[Probably have a figure here to show the `collision compensator'.]
 
-Volume ratios
+\subsection{Audio}
+The audio is generated by a physical model of the tromba marina presented in a companion paper \cite{Willemsen2020}. The algorithm will not be discussed in detail here, but the mapping to the various parameters of the model will be described. 
 
-\subsection{Controls}
-As most people are right-handed, it was chosen to also have the bow in the right hand in the application. \textbf{more about bowing hand here}
+Some parameters of the model are exposed to the Unity scene and can be controlled by the user. These are the velocity, force and position of the bow and the position of the finger inducing the harmonics.
 
-The left hand is used to control the pitch by changing the position of the damping finger along the string. This position is defined as  
+\SWcomment[Talk about volume ratios? It's already discussed in the other paper]
+
+\subsection{Controls and Mapping}\label{sec:controls}
+As most people are right-handed, it was chosen to also have the bow in the right hand in the application. The (now-local) x-velocity of the Omni is mapped to the bow velocity, pressure to bow force and y-position to bow position. The left hand is used to control the pitch by changing the position of the damping finger along the string. This position is defined as  
 \begin{equation}\label{eq:node}
     x_\text{f} = L\cdot n^{-1},
 \end{equation}
@@ -210,29 +225,43 @@ where $L$ is the length of the string and $n \in [2,8]$. If $n$ is an integer, i
   \caption{The left Oculus Touch controller. The controls for changing the pitch are highlighted. \label{fig:oculusController}}
 \end{figure}
 \subsection{Physical setup}\label{subsec:physicalSetup}
+The physical setup is shown in Figure \ref{fig:physicalSetup}
+
+The Omni is mounted on a stand at \texttildelow125 cm to match the approximate bowing height of the real instrument. As can be seen in Figure \ref{fig:physicalSetup}, the right Oculus Touch controller is mounted right underneath the Omni. This is used to align the physical setup with the virtual tromba marina, both in the x-z--plane but also the height of the bow in the application. After the scene is initialised the controller is used for a tilting interaction so that the instrument can rest on the user's shoulder. 
+
+(something about the right Oculus Touch controller determining position and alignment )
+
+A diagram showing the setup of the system can be found in Figure \ref{fig:systemLayout}. The user controls the application using the Omni and the left Oculus Touch controller which sends data to the PC running the application. The Omni sends haptic data back depending on the position and rotation data of pivot point B2. This data triggers the physical model which sends sound to a pair of speakers. The user wears a head-mounted display (HMD) that gives visual information about the location of the tromba marina (and medieval setting) \SWcomment[Different wording or elaboration]. The user's position in the VR environment is controlled by the HMD but this dataflow is not visualised in the diagram. Lastly, the right Oculus Touch controller is attached to the 
+
 \begin{figure}[ht]\includegraphics[width=1.0\columnwidth]{SMC 2020 paper template LaTeX/figures/blockdiagram.png}
 \centering
-  \caption{Diagram showing the system layout of the application. The user interacts with the system using the Omni from which they will gets haptic feedback from. Auditory feedback then comes from speakers and visual feedback from the Oculus Rift headset. A detailed explanation can be found in Section \ref{subsec:physicalSetup}. \label{fig:systemLayout}}
+  \caption{Diagram showing the system layout of the application. The user interacts with the system using the Omni -- which in turn provides haptic feedback -- and the Oculus Touch controller. These trigger the physical model of the tromba marina. Auditory feedback then comes from speakers and visual feedback from the Oculus Rift headset. A detailed explanation can be found in Section \ref{subsec:physicalSetup}. \label{fig:systemLayout}}
 \end{figure}
+
 \section{Evaluation}
-The evaluation was inspired by \cite{Young2003} \cite{Someren1994} \cite{Stowell2009} and \cite{Finstad2010} (\textbf{obviously this will be elaborated upon})
+The evaluation was inspired by \cite{Young2003} \cite{Someren1994} \cite{Stowell2009} and \cite{Finstad2010} \SWcomment[(obviously this will be elaborated upon)]
 
-The goal of the evaluation was not to test minute interactions, but rather the general experience and the playability of our application. The experiment started with the participant reading an introduction about the experiment and 
+The goal of the evaluation was not to test minute interactions, but rather the general experience and the playability of our application. In total, 14 people participated in our experiment, all of which had at least one year of experience playing an instrument. This section will run through the setup of the experiment and the methods we used.
 
-Then
+The experiment started with the participant reading an introduction about the experiment and answering several demographic questions. Then the application and controls were presented after which the participant started the experiment. It was emphasised that the most important part of the experiment was for the participant to speak their mind, ``anything positive, negative, basically anything that comes to mind, please speak out loud".
 
-The interaction part was divided into two parts. Firstly, the participants are asked to explore the instrument on their own. Then, when they feel they are ready to move on, an audio clip made by the authors using the application was played to show what was possible with the application to inspire the second round of free exploration. It was stressed that the participants did not have to recreate what they heard, but merely use it as inspiration. 
+The interaction part was divided into two phases. Firstly, the participants are asked to explore the instrument on their own. Then, when they felt they are ready to move on, an audio clip made by the authors using the application was played to show what was possible with the application to inspire the second round of free exploration. It was stressed that the participants did not have to recreate what they heard, but to merely use it as inspiration. Their actions were observed throughout both phases and noted down as well as their speech. When they felt like they were ready to stop, they were asked to fill out a range of questions about their experience. Their answers were recorded on a 1-5 Likert scale (strongly disagree - strongly agree). Finally, a semi-structured interview was held which lasted 5 minutes on average. The full experiment lasted \texttildelow30 minutes for all participants.
 
-Presenting the second phase as ``We're going to show you a recording made with the instrument" 
+\section{Results}
+In this section, both the quantitative and qualitative results will be given (and discussed) \SWcomment[Separate section for results and discussion I suppose]
+\subsection{Quantitative data}
+\subsection{Qualitative data}
+Many users noted that the full range of the bow could not be used
 
-Semi-structured interview which lasted 5 minutes on average
+Some noted that the control of the damping finger (`Y' for up the string and `X' for down, likewise for the joystick) should have been inversed. Furthermore, some would have liked a more physical interaction for the damping finger, such as moving the controller up and down rather than using buttons. This makes sense... \SWcomment[more here]
 
-The full experiment lasted ca. 30 minutes for all participants.
+Interestingly, many participants believed that it was easy to play the instrument, but that they could become better after some more practice. This shows that the setup has a gentle learning curve, with an envisioned high virtuosity level \SWcomment[one does not imply the other directly (so might want to use different wording here) but it would be good to touch upon this]
 
-\begin{figure}[ht]\includegraphics[width=1.0\columnwidth]{SMC 2020 paper template LaTeX/figures/PlayabilityChart.pdf}
-\centering
-  \caption{Playability chart of a virtual musical instrument \cite{Young2003}. \label{fig:oculusController}}
-\end{figure}
+Many noticed that the bow could rotate along its axis and asked whether it made a difference to which we always answered negatively. 
+% \begin{figure}[ht]\includegraphics[width=1.0\columnwidth]{SMC 2020 paper template LaTeX/figures/PlayabilityChart.pdf}
+% \centering
+%   \caption{Playability chart of a virtual musical instrument \cite{Young2003}. \label{fig:oculusController}}
+% \end{figure}
 
 \section{Discussion}\label{sec:discussion}
 Cognitive load of speech and playing an instrument are ``the same" (Paisa, 2020). So participants speaking their mind while playing might be an issue. Most probably, they will alter between playing and ``thinking aloud". 
@@ -241,7 +270,7 @@ Cognitive load of speech and playing an instrument are ``the same" (Paisa, 2020)
 test
 
 \begin{acknowledgments}
-Thanks thanksthanks
+We would like to thank all participants for taking the time to test our implementation...
 \end{acknowledgments} 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
