@@ -185,7 +185,12 @@ The PHANTOM Omni (or simply Omni) is a six-degrees-of-freedom haptic system deve
 The virtual tromba marina consists of several components: visuals, haptics and audio, all of which will be elaborated upon in this section. Then controls and mapping and finally the setup of the system will be presented.
 
 \subsection{Visuals}
-The application was built using cross-platform game engine Unity \cite{unity}. Unity can be used to build applications for Virtual Reality (VR) applications. A 3D model of the tromba marina was made inspired by a real-life instrument (presented in \cite{Baldwin2016}) available to the authors. Even though the visuals are not the focus of the implementation and eventual evaluation, it was used to guide the users movements and give them a sense of where the virtual instrument was located. Furthermore, a transparent white sphere was shown to indicate the location of the damping finger along the string. Moreover, some time was spent to make the scene `medieval' to match the instrument. \SWcomment[You could probably elaborate better here Razvan]
+The application was built using cross-platform game engine Unity \cite{unity}. Unity can be used to build applications for Virtual Reality (VR) applications. Even though the visuals are not the focus of the implementation and eventual evaluation, it was used to guide the users movements and give them a sense of where the virtual instrument was located. See Figure \ref{fig:vrView} for a screenshot of the view from the head-mounted display (HMD). A 3D model of the tromba marina was made inspired by a real-life instrument (presented in \cite{Baldwin2016}) available to the authors. Furthermore, a transparent white sphere was shown to indicate the location of the damping finger along the string. Moreover, some time was spent to make the scene `medieval' to match the instrument. \SWcomment[You could probably elaborate better here Razvan]
+
+\begin{figure}[ht]\includegraphics[width=1.0\columnwidth]{SMC 2020 paper template LaTeX/figures/vrView.png}
+\centering
+  \caption{The view from the head-mounted display (HMD). The bow is in contact with the string and the damping finger is shown as a transparent white sphere. \label{fig:vrView}}
+\end{figure}
 
 \subsection{Haptics}
 The raw data provided by the Omni is the following:
@@ -198,21 +203,18 @@ The raw data provided by the Omni is the following:
 The axes are labelled as follows in relation to the virtual tromba marina: x-axis - width (horizontally across the soundboard -- the common interaction direction), y-axis - height (floor to ceiling) and z-axis - depth (horizontally perpendicular to the soundboard).
 
 
-The end of the bow -- where a user normally holds it -- has been placed at the pivot point B2 \SWcomment[$\leftarrow$ is this true?]
-The fact that pivot points B1-3 do not provide force feedback gives rise to an issue in our application. If the virtual
-position of pivot point B2 is not the current point of interaction, in the extreme case when the user is bowing using the end of the bow, a force has to be applied as to not go through the string. To solve this issue, we created a separate object with which the bow (pivot point B2 to be exact) will interact with. The y-rotation and y-position of this exactly follows that of the Omni-pen and uses the virtual string as the centerpoint. The y-rotation will change the rotation of a local coordinate system (see Figure \ref{fig:localGlobal}. Furthermore, its (now local) x-position is determined by the distance between B2 and the string. 
+The end of the bow -- where a user normally holds it -- has been placed at the pivot point B2. The fact that pivot points B1-3 do not provide force feedback gives rise to an issue in our application. If the virtual
+position of pivot point B2 is not the current point of interaction, in the extreme case when the user is bowing using the end of the bow, a force has to be applied as to not go through the string. To solve this issue, we created a separate object with which the bow (pivot point B2 to be exact) will interact with (see Figure \ref{fig:localGlobal}). The y-rotation and y-position of this exactly follows that of the Omni-pen and uses the virtual string as the centerpoint. The y-rotation will change the rotation of a local coordinate system. Furthermore, its (now local) x-position is determined by the distance between B2 and the string. 
 
 \begin{figure}[ht]\includegraphics[width=1.0\columnwidth]{SMC 2020 paper template LaTeX/globalLocal.pdf}
 \centering
-  \caption{The local coordinate system with respect to the global coordinate system. Its rotation around the (global) y-axis is determined by the y-rotation of the bow. The (normally hidden) collision block lives in the local coordinate system. Its (local) x and y-position follows the (local) x and y-position of B2. \label{fig:localGlobal}}
+  \caption{Top-down view of the global and local coordinate system (x-z--plane). The rotation of the local coordinate system around the (global) y-axis is determined by the y-rotation of the bow. The (normally hidden) collision block lives in the local coordinate system. Its (local) x and y-position follows the (local) x and y-position of B2. \label{fig:localGlobal}}
 \end{figure}
 
 \subsection{Audio}
 The audio is generated by a physical model of the tromba marina presented in a companion paper \cite{Willemsen2020}. The algorithm will not be discussed in detail here, but the mapping to the various parameters of the model will be described. 
 
-Some parameters of the model are exposed to the Unity scene and can be controlled by the user. These are the velocity, force and position of the bow and the position of the finger inducing the harmonics.
-
-\SWcomment[Talk about volume ratios? It's already discussed in the other paper]
+Some parameters of the model are exposed to the Unity scene and can be controlled by the user. These are the velocity, force and position of the bow and the position of the finger inducing the harmonics. The controls are described below.
 
 \subsection{Controls and Mapping}\label{sec:controls}
 As most people are right-handed, it was chosen to also have the bow in the right hand in the application. The (now-local) x-velocity of the Omni is mapped to the bow velocity, pressure to bow force and y-position to bow position. The left hand is used to control the pitch by changing the position of the damping finger along the string. This position is defined as  
@@ -234,9 +236,7 @@ The physical setup is shown in Figure \ref{fig:physicalSetup}
 
 The Omni is mounted on a stand at \texttildelow125 cm to match the approximate bowing height of the real instrument. As can be seen in Figure \ref{fig:physicalSetup}, the right Oculus Touch controller is mounted right underneath the Omni. This is used to align the physical setup with the virtual tromba marina, both in the x-z--plane but also the height of the bow in the application. After the scene is initialised the controller is used for a tilting interaction so that the instrument can rest on the user's shoulder. 
 
-(something about the right Oculus Touch controller determining position and alignment )
-
-A diagram showing the setup of the system can be found in Figure \ref{fig:systemLayout}. The user controls the application using the Omni and the left Oculus Touch controller which sends data to the PC running the application. The Omni sends haptic data back depending on the position and rotation data of pivot point B2. This data triggers the physical model which sends sound to a pair of speakers. The user wears a head-mounted display (HMD) that gives visual information about the location of the tromba marina (and medieval setting) \SWcomment[Different wording or elaboration]. The user's position in the VR environment is controlled by the HMD but this dataflow is not visualised in the diagram. Lastly, the right Oculus Touch controller is attached to the 
+A diagram showing the setup of the system can be found in Figure \ref{fig:systemLayout}. The user controls the application using the Omni and the left Oculus Touch controller which sends data to the PC running the application. The Omni sends haptic data back depending on the position and rotation data of pivot point B2. This data triggers the physical model which sends sound to a pair of speakers. The user wears a HMD that gives visual information about the location of the tromba marina (and medieval setting) \SWcomment[Different wording or elaboration]. The user's position in the VR environment is controlled by the HMD but this dataflow is not visualised in the diagram. Lastly, the right Oculus Touch controller is attached to the 
 
 \begin{figure}[ht]\includegraphics[width=1.0\columnwidth]{SMC 2020 paper template LaTeX/figures/blockdiagram.png}
 \centering
