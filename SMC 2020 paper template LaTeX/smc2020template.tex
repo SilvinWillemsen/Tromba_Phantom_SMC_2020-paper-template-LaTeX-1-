@@ -185,7 +185,7 @@ The PHANTOM Omni (or simply Omni) is a six-degrees-of-freedom haptic system deve
 The virtual tromba marina consists of several components: visuals, haptics and audio, all of which will be elaborated upon in this section. Then controls and mapping and finally the setup of the system will be presented.
 
 \subsection{Visuals}
-The application was built using cross-platform game engine Unity \cite{unity}. Unity can be used to build applications for Virtual Reality (VR) applications. A 3D model of the tromba marina was made inspired by a real-life instrument (presented in \cite{Baldwin2016}) available to the authors. Even though the visuals are not the focus of the implementation and eventual evaluation, it was used to guide the users movements and give them a sense of where the virtual instrument was located. Moreover, some time was spent to make the scene `medieval' to match the instrument. \SWcomment[You could probably elaborate better here Razvan]
+The application was built using cross-platform game engine Unity \cite{unity}. Unity can be used to build applications for Virtual Reality (VR) applications. A 3D model of the tromba marina was made inspired by a real-life instrument (presented in \cite{Baldwin2016}) available to the authors. Even though the visuals are not the focus of the implementation and eventual evaluation, it was used to guide the users movements and give them a sense of where the virtual instrument was located. Furthermore, a transparent white sphere was shown to indicate the location of the damping finger along the string. Moreover, some time was spent to make the scene `medieval' to match the instrument. \SWcomment[You could probably elaborate better here Razvan]
 
 \subsection{Haptics}
 The raw data provided by the Omni is the following:
@@ -204,7 +204,7 @@ position of pivot point B2 is not the current point of interaction, in the extre
 
 \begin{figure}[ht]\includegraphics[width=1.0\columnwidth]{SMC 2020 paper template LaTeX/globalLocal.pdf}
 \centering
-  \caption{The local coordinate system with respect to the global coordinate system. Its rotation around the (global) y-axis is determined by the y-rotation of the bow. The (normally hidden) collision block lives in the local coordinate system. Its (local) x-position depends on the (local) x-position of B2. \label{fig:localGlobal}}
+  \caption{The local coordinate system with respect to the global coordinate system. Its rotation around the (global) y-axis is determined by the y-rotation of the bow. The (normally hidden) collision block lives in the local coordinate system. Its (local) x and y-position follows the (local) x and y-position of B2. \label{fig:localGlobal}}
 \end{figure}
 
 \subsection{Audio}
@@ -248,9 +248,9 @@ The evaluation was inspired by \cite{Young2003} \cite{Someren1994} \cite{Stowell
 
 The goal of the evaluation was not to test minute interactions, but rather the general experience and the playability of our application. In total, 14 people participated in our experiment, all of which had at least one year of experience playing an instrument. This section will run through the setup of the experiment and the methods we used.
 
-The experiment started with the participant reading an introduction about the experiment and answering several demographic questions. Then the application and controls were presented after which the participant started the experiment. It was emphasised that the most important part of the experiment was for the participant to speak their mind, ``anything positive, negative, basically anything that comes to mind, please speak out loud".
+The experiment started with the participant reading an introduction about the experiment and answering several demographic questions. Then the application and controls were presented after which the participant started the experiment. It was emphasised that the most important part of the experiment was for the participant to speak their mind, ``anything positive, negative, basically anything that comes to mind, please speak out loud". Furthermore, the user was instructed to bow above the damping finger (visualised as a white sphere) at all times, as this is also the interaction with the real instrument. 
 
-The interaction part was divided into two phases. Firstly, the participants are asked to explore the instrument on their own. Then, when they felt they are ready to move on, an audio clip made by the authors using the application was played to show what was possible with the application to inspire the second round of free exploration. It was stressed that the participants did not have to recreate what they heard, but to merely use it as inspiration. Their actions were observed throughout both phases and noted down as well as their speech. When they felt like they were ready to stop, they were asked to fill out a range of questions about their experience. Their answers were recorded on a 1-5 Likert scale (strongly disagree - strongly agree). Finally, a semi-structured interview was held which lasted 5 minutes on average. The full experiment lasted \texttildelow30 minutes for all participants.
+The interaction part was divided into two phases. Firstly, the participants are asked to explore the instrument on their own. Then, when they felt they are ready to move on, an audio clip made by the authors using the application was played to show what was possible with the application to inspire the second round of free exploration. It was stressed that the participants did not have to recreate what they heard, but to merely use it as inspiration. Their actions were observed throughout both phases and noted down as well as their speech. When they felt like they were ready to stop, they were asked to fill out a range of questions about their experience. Their answers were recorded on a 5-point Likert scale (strongly disagree - strongly agree). Finally, a semi-structured interview was held which lasted 5 minutes on average. The full experiment lasted \texttildelow30 minutes for all participants.
 
 \section{Results}
 In this section, both the quantitative and qualitative results will be given (and discussed) \SWcomment[Separate section for results and discussion I suppose]
@@ -263,6 +263,8 @@ Some noted that the control of the damping finger (`Y' for up the string and `X'
 Interestingly, many participants believed that it was easy to play the instrument, but that they could become better after some more practice. This shows that the setup has a gentle learning curve, with an envisioned high virtuosity level \SWcomment[one does not imply the other directly (so might want to use different wording here) but it would be good to touch upon this]
 
 Many noticed that the bow could rotate along its axis and asked whether it made a difference to which we always answered negatively. 
+
+Some participants noted that they wanted to recreate the example sound, but couldn't because it sounded way more distorted. We recorded the example where the plugin was set to maximum volume causing clipping to the sound. The volume was turned down during the test to make it less distorted, but the recording was not remade.
 % \begin{figure}[ht]\includegraphics[width=1.0\columnwidth]{SMC 2020 paper template LaTeX/figures/PlayabilityChart.pdf}
 % \centering
 %   \caption{Playability chart of a virtual musical instrument \cite{Young2003}. \label{fig:oculusController}}
