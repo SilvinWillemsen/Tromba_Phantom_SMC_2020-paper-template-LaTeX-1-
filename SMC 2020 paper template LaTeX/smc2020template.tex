@@ -187,17 +187,16 @@ The PHANTOM Omni (or simply Omni) is a six-degrees-of-freedom tracking and hapti
 
 \begin{figure}[t]\includegraphics[width=1.0\columnwidth]{figures/omniSchematic.png}
 \centering
-  \caption{The PHANTOM Omni has six axes of rotation, three of which provide force feedback (A1-3), and three only tracking position (B1-3). Together, these axes provide six degrees of freedom: x, y and z positions of B2 and rotations of the pen. \label{fig:omni}}
+  \caption{The PHANTOM Omni has six axes of rotation, three of which provide force feedback (A1-3), and three only tracking position (B1-3). Together, these axes provide six degrees of freedom: x, y and z positions of B2 (according to the shown coordinate system) and rotations of the pen. \label{fig:omni}}
 \end{figure}
 
 The raw data provided by the Omni is 1) the absolute position of pivot point B2 (three degrees of freedom), 2) the rotation (three degrees of freedom), and 3) the pressure (touching depth).
 
-The axes are labelled as follows in relation to the virtual tromba marina (also see global coordinate system in Figure \ref{fig:localGlobal}): x-axis (width): horizontally across the soundboard (the common interaction direction), y-axis (height): floor to ceiling, and z-axis (depth): perpendicular to the soundboard.
+The axes are labelled as follows in relation to the virtual tromba marina (also see global coordinate system in Figure \ref{fig:localGlobal}): x-axis (width): horizontally across the soundboard (the common interaction direction), y-axis (height): floor to ceiling, and z-axis (depth): perpendicular to the soundboard. The orientation of the Omni with respect to the aforementioned axis can be seen from the coordinate system in Figure \ref{fig:omni}.
 
-The end of the bow -- where a user normally holds it -- has been placed at pivot point B2. The fact that pivot points B1-3 do not provide force feedback gives rise to an issue in our application. If the virtual
-position of pivot point B2 is not the current point of interaction, in the extreme case when the user is bowing using the end of the bow, a force has to be applied as to still provide haptic feedback. To solve this issue, we created a separate game object with which the bow (pivot point B2 to be exact) will interact with in the virtual world Figure \ref{fig:localGlobal}. This `(hidden) collision block' lives in a local coordinate system and its x and y-position exactly follow that of the Omni-pen. The y-rotation will change the rotation of the local coordinate system and uses the virtual string as the center point. If, for any reason, the bow ends up behind the string, the collision block will be offset to the left along the (local) x-axis so that no collision occurs when trying to return the bow to the normal playing area. 
+The fact that pivot points B1-3 do not provide force feedback gives rise to an issue in our application. The virtual bow's frog (where it is held by the player) has been placed at the pivot point B2, whereas the interaction between the virtual bow and string happens at an offset as seen in Figure \ref{fig:localGlobal}. To solve this issue, we created a separate game object with which the bow (pivot point B2 to be exact) will interact with in the virtual world Figure \ref{fig:localGlobal}. This `(hidden) collision block' lives in a local coordinate system and its x and y-position exactly follow that of the Omni-pen. The y-rotation will change the rotation of the local coordinate system and uses the virtual string as the center point. If, for any reason, the bow ends up behind the string, the collision block will be offset to the left along the (local) x-axis so that no collision occurs when trying to return the bow to the normal playing area. 
 
-\begin{figure}[ht]\includegraphics[width=1.0\columnwidth]{SMC 2020 paper template LaTeX/figures/globalLocal.pdf}
+\begin{figure}[t]\includegraphics[width=1.0\columnwidth]{SMC 2020 paper template LaTeX/figures/globalLocal.pdf}
 \centering
   \caption{Top-down view of the global and local coordinate system (x-z--plane). The rotation of the local coordinate system around the (global) y-axis is determined by the y-rotation of the bow. The (normally hidden) collision block lives in the local coordinate system. Its (local) x and y-position follows the (local) x and y-position of B2. \label{fig:localGlobal}}
 \end{figure}
@@ -218,7 +217,7 @@ The API of the Omni provides a list of pseudophysical parameters on which the ha
     \label{tab:pseudoParams}
 \end{table}
 
-Throughout implementation, it was considered to actuate the Haptic Omni's pen with vibrotatctile stimuli, in order to replicate the stick-slip interaction encountered in a real bowing scenario. This was deemed unnecessary, as the Omni's internal gearing systems provide a similar, though uncorrelated, haptic feedback, which satisfied the authors.  
+Throughout implementation, it was considered to actuate the Omni's pen with vibrotatctile stimuli, in order to replicate the stick-slip interaction encountered in a real bowing scenario. This was deemed unnecessary, as the Omni's internal gearing systems provide a similar, though uncorrelated, haptic feedback, which satisfied the authors.  
 
 \subsection{Controls and Mapping}\label{sec:controls}
 As most people are right-handed, it was chosen to also have the bow in the right hand in the application. The (now-local) x-velocity of the Omni is mapped to the bow velocity, pressure to bow force and y-position (including rotation around the local z-axis) to bow position. The left hand is used to control the pitch by changing the position of the damping finger along the string. This position is defined as  
